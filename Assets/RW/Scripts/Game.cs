@@ -100,6 +100,16 @@ public class Game : MonoBehaviour
         instance.scoreText.text = "Score: " + instance.score;
     }
 
+    public static void PlayerSpeedLower()
+    {
+        instance.GetShip().speed = 4;
+    }
+
+    public static void PlayerSpeedHigher()
+    {
+        instance.GetShip().speed = 7;
+    }
+
 
     public Ship GetShip()
     {

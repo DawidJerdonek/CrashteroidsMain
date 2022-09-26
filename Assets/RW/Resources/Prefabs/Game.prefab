@@ -5888,7 +5888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
-  speed: 5
+  speed: 7
   canShoot: 1
   mesh: {fileID: 23655058077935950}
   explosion: {fileID: 1293165385092864}

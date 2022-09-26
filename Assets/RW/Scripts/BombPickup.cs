@@ -5,7 +5,7 @@ using UnityEngine;
 public class BombPickup : MonoBehaviour
 {
     public float speed = 8;
-    private float maxY = -5.0f;
+    private float maxY = -100.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -32,8 +32,21 @@ public class BombPickup : MonoBehaviour
     {
         if (collision.gameObject.name == "ShipModel")
         {
-            
-            Destroy(gameObject);
+            Debug.Log("starting Speed corou");
+            StartCoroutine(SlowPlayer());
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<BoxCollider>().enabled = false;
         }
+    }
+
+
+    IEnumerator SlowPlayer()
+    {
+        Debug.Log("Lower Speed");
+        Game.PlayerSpeedLower();
+        yield return new WaitForSecondsRealtime(4);
+        Game.PlayerSpeedHigher();
+        Debug.Log("Higehr Speed");
+        Destroy(gameObject);
     }
 }

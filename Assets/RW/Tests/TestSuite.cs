@@ -220,7 +220,18 @@ public class TestSuite
     }
 
 
+    [UnityTest]
+    public IEnumerator PickupBombSlowPlayer()
+    {
 
+        GameObject pickup = game.GetSpawner().SpawnBombPickup();
+        pickup.transform.position = Vector3.zero;
+        GameObject player = game.GetShip().gameObject;
+        player.transform.position = Vector3.zero;
+        yield return new WaitForSeconds(0.1f);
+
+        Assert.Less(game.GetShip().speed, 7);
+    }
 
 
 }
