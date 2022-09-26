@@ -132,4 +132,47 @@ public class TestSuite
 
     }
 
+    [UnityTest]
+    public IEnumerator PlayerUpMovement()
+    {
+        Vector2 oldPlayerPos = game.GetShip().transform.position;
+
+        game.GetShip().MoveUp();
+
+        Vector2 newPlayerPos = game.GetShip().transform.position;
+
+        yield return new WaitForSeconds(0.1f);
+
+        Assert.Greater(newPlayerPos.y, oldPlayerPos.y);
+    }
+
+    [UnityTest]
+    public IEnumerator PlayerDownMovement()
+    {
+        Vector2 oldPlayerPos = game.GetShip().transform.position;
+
+        game.GetShip().MoveDown();
+
+        Vector2 newPlayerPos = game.GetShip().transform.position;
+
+        yield return new WaitForSeconds(0.1f);
+
+        Assert.Less(newPlayerPos.y, oldPlayerPos.y);
+    }
+
+    [UnityTest]
+    public IEnumerator PlayerMovementBounds()
+    {
+        game.GetShip().MoveDown();
+        game.GetShip().MoveDown();
+        game.GetShip().MoveDown();
+        game.GetShip().MoveDown();
+
+        Vector2 newPlayerPos = game.GetShip().transform.position;
+
+        yield return new WaitForSeconds(0.1f);
+
+        Assert.GreaterOrEqual(newPlayerPos.y, game.GetShip().minTop);
+    }
+
 }

@@ -49,6 +49,8 @@ public class Ship : MonoBehaviour
 
     private float maxLeft = -8;
     private float maxRight = 8;
+    private float maxTop = 2.5f;
+    public float minTop = -3.25f;
 
     private void Update()
     {
@@ -71,6 +73,16 @@ public class Ship : MonoBehaviour
         {
             MoveRight();
         }
+
+        if(Input.GetKey(KeyCode.UpArrow))
+        {
+            MoveUp();
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            MoveDown();
+        }
+
     }
 
     public void ShootLaser()
@@ -109,6 +121,24 @@ public class Ship : MonoBehaviour
         if (transform.position.x > maxRight)
         {
              transform.position = new Vector3(maxRight, -3.22f, 0);
+        }
+    }
+
+    public void MoveUp()
+    {
+        transform.Translate(-Vector3.forward * Time.deltaTime * speed);
+        if (transform.position.y > maxTop)
+        {
+            transform.position = new Vector3(gameObject.transform.position.x, maxTop, 0);
+        }
+    }
+
+    public void MoveDown()
+    {
+        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        if (transform.position.y < minTop)
+        {
+            transform.position = new Vector3(gameObject.transform.position.x, minTop, 0);
         }
     }
 
