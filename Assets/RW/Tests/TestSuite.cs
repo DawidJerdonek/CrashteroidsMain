@@ -132,4 +132,40 @@ public class TestSuite
 
     }
 
+    [UnityTest]
+    public IEnumerator SpawnAndMovePickup()
+    {
+        GameObject pickup = game.GetSpawner().SpawnBonusPickup();
+        float initialYPos = pickup.transform.position.y;
+        yield return new WaitForSeconds(0.1f);
+
+        Assert.Less(pickup.transform.position.y, initialYPos);
+    }
+
+    [UnityTest]
+    public IEnumerator PickupScoreAdd()
+    {
+
+        GameObject pickup = game.GetSpawner().SpawnBonusPickup();
+        pickup.transform.position = Vector3.zero;
+        GameObject player = game.GetShip().gameObject;
+        player.transform.position = Vector3.zero;
+        yield return new WaitForSeconds(0.1f);
+
+        Assert.AreEqual(game.score, 10);
+    }
+
+    [UnityTest]
+    public IEnumerator PickupDeletedOffscreen()
+    {
+
+        GameObject pickup = game.GetSpawner().SpawnBonusPickup();
+        pickup.transform.position = new Vector3( 0,-6.0f,0);
+        yield return new WaitForSeconds(0.1f);
+
+        UnityEngine.Assertions.Assert.IsNull(pickup);
+    }
+
+
+
 }
