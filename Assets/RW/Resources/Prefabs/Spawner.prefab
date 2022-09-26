@@ -52,6 +52,8 @@ MonoBehaviour:
   asteroid4: {fileID: 1371151476748460}
   bonusPickup: {fileID: 1944308946388576287, guid: f0379562bc4976c4e827edd02260c4f4,
     type: 3}
+  bombPickup: {fileID: 2140164395558731211, guid: e37a8120619f42049874ca76148b0e16,
+    type: 3}
 --- !u!1 &1371151476748460
 GameObject:
   m_ObjectHideFlags: 0

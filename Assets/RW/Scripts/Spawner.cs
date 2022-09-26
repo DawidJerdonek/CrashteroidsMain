@@ -46,11 +46,14 @@ public class Spawner : MonoBehaviour
     private GameObject asteroid4;
     [SerializeField]
     private GameObject bonusPickup;
+    [SerializeField]
+    private GameObject bombPickup;
 
     public void BeginSpawning()
     {
         StartCoroutine("Spawn");
         StartCoroutine("SpawnBonus");
+        StartCoroutine("SpawnBomb");
     }
 
     IEnumerator Spawn()
@@ -63,11 +66,20 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnBonus()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(5.0f);
 
         SpawnBonusPickup();
         StartCoroutine("SpawnBonus");
     }
+
+    IEnumerator SpawnBomb()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        SpawnBombPickup();
+        StartCoroutine("SpawnBomb");
+    }
+
 
     public GameObject SpawnBonusPickup()
     {
@@ -82,6 +94,22 @@ public class Spawner : MonoBehaviour
 
 
         return bonus;
+    }
+
+
+    public GameObject SpawnBombPickup()
+    {
+
+        GameObject bomb = Instantiate(bombPickup);
+
+        bomb.SetActive(true);
+        float xPos = Random.Range(-8.0f, 8.0f);
+
+        // Spawn asteroid just above top of screen at a random point along x-axis
+        bomb.transform.position = new Vector3(xPos, 7.35f, -0.1f);
+
+
+        return bomb;
     }
 
     public GameObject SpawnAsteroid()
@@ -133,5 +161,6 @@ public class Spawner : MonoBehaviour
     {
         StopCoroutine("Spawn");
         StopCoroutine("SpawnBonus");
+        StopCoroutine("SpawnBomb");
     }
 }

@@ -209,6 +209,17 @@ public class TestSuite
         UnityEngine.Assertions.Assert.IsNull(pickup);
     }
 
+    [UnityTest]
+    public IEnumerator SpawnAndMoveBomb()
+    {
+        GameObject bomb = game.GetSpawner().SpawnBombPickup();
+        float initialYPos = bomb.transform.position.y;
+        yield return new WaitForSeconds(0.1f);
+
+        Assert.Less(bomb.transform.position.y, initialYPos);
+    }
+
+
 
 
 
