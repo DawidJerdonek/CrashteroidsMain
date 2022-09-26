@@ -94,6 +94,13 @@ public class Game : MonoBehaviour
         instance.scoreText.text = "Score: " + instance.score;
     }
 
+    public static void BonusPickupScore()
+    {
+        instance.score+= 10;
+        instance.scoreText.text = "Score: " + instance.score;
+    }
+
+
     public Ship GetShip()
     {
         return shipModel.GetComponent<Ship>();
